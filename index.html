@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text-to-Speech App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+     
+       background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+    
+      width: 80%;
+      max-width: 400px;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+      height: 45%;
+    }
+
+    .container:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .language-options {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: block;
+    }
+h1{
+    text-align: center;
+    padding-bottom: 5%;
+}
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 5px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .fa-play {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Text To Speech</h1>
+    <label for="inputText">Enter Text:</label>
+    <textarea id="inputText" ></textarea>
+
+    <div class="language-options">
+      <label for="languageSelect">Select Voice:</label>
+      <select id="languageSelect">
+        <option value="en-US">Google US English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="ru">Русский</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+
+    <button onclick="convertToSpeech()">
+      <i class="fas fa-play"></i> Convert To Speech
+    </button>
+  </div>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+  <script>
+    function convertToSpeech() {
+      const selectedVoice = document.getElementById('languageSelect').value;
+
+      const inputText = document.getElementById('inputText').value;
+
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(inputText);
+
+        utterance.voiceURI = selectedVoice;
+
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Text-to-speech is not supported in this browser.');
+      }
+    }
+  </script>
+</body>
+</html>
